@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+date: 2023-08-12
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+Hiked my first 6000-er - <a href='https://en.wikipedia.org/wiki/Grinnell_Glacier'>Grinnell Glacier, MT</a>
