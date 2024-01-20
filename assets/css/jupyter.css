@@ -42,10 +42,10 @@
     * Use these against the brand/accent/warn/error colors.
     * These will typically go from light to darker, in both a dark and light theme.
     */
-    --jp-ui-inverse-font-color0: rgba(255, 255, 255, 1);
+    /* --jp-ui-inverse-font-color0: rgba(255, 255, 255, 1);
     --jp-ui-inverse-font-color1: rgba(255, 255, 255, 1);
     --jp-ui-inverse-font-color2: rgba(255, 255, 255, 0.7);
-    --jp-ui-inverse-font-color3: rgba(255, 255, 255, 0.5);
+    --jp-ui-inverse-font-color3: rgba(255, 255, 255, 0.5); */
 
     /* Content Fonts
     *
@@ -79,10 +79,12 @@
     * The following are the inverse layout colors use in JupyterLab. In a light
     * theme these would go from dark to light.
     */
+    /*
     --jp-inverse-layout-color0: #111111;
     --jp-inverse-layout-color1: var(--md-grey-900);
     --jp-inverse-layout-color2: var(--md-grey-800);
     --jp-inverse-layout-color3: var(--md-grey-700);
+    */
 
     /* Brand/accent */
     --jp-brand-color0: var(--md-blue-900);
@@ -225,11 +227,13 @@ body[data-jp-theme-light="false"] {
     * Use these against the brand/accent/warn/error colors.
     * These will typically go from light to darker, in both a dark and light theme.
     */
+    /*
     --jp-ui-inverse-font-color0: rgba(0, 0, 0, 1);
     --jp-ui-inverse-font-color1: rgba(0, 0, 0, 0.8);
     --jp-ui-inverse-font-color2: rgba(0, 0, 0, 0.5);
     --jp-ui-inverse-font-color3: rgba(0, 0, 0, 0.3);
-
+    */
+    
     /* Content Fonts
     *
     * Content font variables are used for typography of user generated content.
@@ -262,10 +266,12 @@ body[data-jp-theme-light="false"] {
     * The following are the inverse layout colors use in JupyterLab. In a light
     * theme these would go from dark to light.
     */
+    /*
     --jp-inverse-layout-color0: white;
     --jp-inverse-layout-color1: white;
     --jp-inverse-layout-color2: var(--md-grey-200);
     --jp-inverse-layout-color3: var(--md-grey-400);
+    */
 
     /* Brand/accent */
     --jp-brand-color0: var(--md-blue-700);
