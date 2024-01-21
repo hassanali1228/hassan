@@ -55,21 +55,35 @@ There also exist tests in the pipelines to ensure deployment safety. Since we ca
 
 ##### **Faster deployments**
 
-As we know all config files are constant and every Process will return `B` for every input `A`, we can share artifacts between different builds. For example:
+As we know all config files are constant and every Process will return `B` for every input `A`, we can share artifacts between different image builds. For example:
 
 ```mermaid
 ---
 title: Dependency Graph
 ---
 flowchart TD
-    ImageA --> ProcA
-    ImageB --> ProcA
-    ProcA --> ConfigA 
-    ProcA --> ConfigB
+    IA[Image A] --> A{Proc A}
+    IB[Image B] --> A{Proc A}
+    IC[Image C] --> B{Proc B}
+    A --> CA[Config A] 
+    A --> CB[Config B]
+    B --> CC[Config C]
 ```
 
-By caching our output at `Proc A` for inputs (`Config A` and `Config B`), we speed up our deployment builds.
+By caching our output at `Proc A` for its inputs, `Config A` and `Config B`, we speed up our deployment builds.
 
-##### **E**
+Furthermore we can avoid builds that do not change, for example, when only `Config A` is changed, we do not need to build `Image C`. This is a direct consequence of knowing our In's and Out's in the deployment process.
 
-F
+##### **Storage overhead**
+
+We know immutable objects make garbage collection easy in programming languages, due to the elimination of duplicate objects. Similarly here, the artifact created by `Proc A` is not dupliciated and hence lowers the storage overhead of the deployment build.
+
+On a large scale, when our images are tagged: ImageA.v0, ImageA.v1, ImageA.v2, ..., we only need to keep a single copy of each. Without immutable deployments, we can not tag images as they can mutate. As a consequence, we do not know what is where and why it is 😨.
+
+##### **Support overhead**
+
+As one might guess, there are going to be a lot less support calls now that we can see what broke the build. Ideally most breaking changes are detected at the CI/CD level. If a new release goes bad, roll backs are a lot easier since everything is tagged in Git. If a user adds a fs mount that doesn't work, they can't (ideally). 
+
+##### **Engineering overhead**
+
+You might need to hire a few engineers who are specialized in infra and can implement a system like this. But that's a win in my books :)
