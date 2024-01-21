@@ -8,7 +8,6 @@ giscus_comments: true
 related_posts: false
 mermaid:
     enabled: true
-    zoomable: true
 
 ---
 
