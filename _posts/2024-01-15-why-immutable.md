@@ -36,7 +36,7 @@ Here is a mutable data structure: a pythonic list. The object can be modified at
 
 ## Immutability in Infrastructure
 
-According to [CNCF](https://glossary.cncf.io/immutable-infrastructure), immutable infra is **infra that cannot be changed once deployed**. It is a challenging problem, for example with VM deployments, users can add file system mounts and this couldn't be tracked. Now if the VM goes down, restoration is difficult. True [Infrastructure as Code](https://glossary.cncf.io/infrastructure-as-code/) (IaC) largely solves this problem as each "release" is tagged (our `hash`) in version control. We can implement IaC by using containerization where each (docker) image will be tagged. We need further steps to ensure users can't ssh and make [breaking changes](https://en.wiktionary.org/wiki/breaking_change#:~:text=Noun,code%20used%20by%20multiple%20applications.). Every change must happen through code.
+According to [CNCF](https://glossary.cncf.io/immutable-infrastructure), immutable infra is **infra that cannot be changed once deployed**. It is a challenging problem, for example with VM deployments, users can add file system mounts and this couldn't be tracked. Now if the VM goes down, restoration is difficult. True [Infrastructure as Code](https://glossary.cncf.io/infrastructure-as-code/) (IaC) largely solves this problem as each "release" (immutable) is tagged with a version (our `hash`) in version control. We can implement IaC by using containerization where each (docker) image has a tag. We need further steps to ensure users can't ssh and make [breaking changes](https://en.wiktionary.org/wiki/breaking_change#:~:text=Noun,code%20used%20by%20multiple%20applications.). Every change must happen through code.
 
 Referring back to immutability in programming, immutability enables *referential transparency* (fxn `y` always returns `z` for input: `x`) as the value the variable `x` refers to never changes. This in turn enables pure functions (*and by extension, functional programming*). 
 
@@ -44,4 +44,26 @@ In IaC, we see that immutable deployments ensure everything is constant for a de
 
 ### Why?
 
-A
+##### **Simpler and Safer deployments**
+
+Now since every change goes through code, we can incorporate CI/CD pipelines to make changes on the fly. The pipelines become easier to write as we don't need to worry about a global state when building, it's just chained functions: (Config A, B, C -> Proc A -> Artifact A, B -> Proc B -> Image-0.0.1).
+
+There also exist tests in the pipelines to ensure deployment safety. Since we can reason about functions locally and all artifacts used to build the images are *constant*, these tests become very simple to write.
+
+##### **Faster deployments**
+
+As we know all config files are constant and every Process will return `B` for every input `A`, we can share artifacts between different builds. For example:
+
+```mermaid
+flowchart TD
+    Image-A --> Proc A
+    Image-B --> Proc A
+    Proc A --> Config A 
+    Proc A --> Config B
+```
+
+By caching our output at `Proc A` for inputs (`Config A` and `Config B`), we speed up our deployment builds.
+
+##### **E**
+
+F
