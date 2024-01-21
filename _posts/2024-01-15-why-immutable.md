@@ -59,6 +59,9 @@ There also exist tests in the pipelines to ensure deployment safety. Since we ca
 As we know all config files are constant and every Process will return `B` for every input `A`, we can share artifacts between different builds. For example:
 
 ```mermaid
+---
+title: Dependency Graph
+---
 flowchart TD
     ImageA --> ProcA
     ImageB --> ProcA
