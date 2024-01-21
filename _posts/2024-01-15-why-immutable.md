@@ -6,6 +6,10 @@ description:
 tags: infra tech
 giscus_comments: true
 related_posts: false
+mermaid:
+    enabled: true
+    zoomable: true
+
 ---
 
 Let's first look at what immutability looks like in software.
@@ -56,10 +60,10 @@ As we know all config files are constant and every Process will return `B` for e
 
 ```mermaid
 flowchart TD
-    Image-A --> Proc A
-    Image-B --> Proc A
-    Proc A --> Config A 
-    Proc A --> Config B
+    ImageA --> ProcA
+    ImageB --> ProcA
+    ProcA --> ConfigA 
+    ProcA --> ConfigB
 ```
 
 By caching our output at `Proc A` for inputs (`Config A` and `Config B`), we speed up our deployment builds.
