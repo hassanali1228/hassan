@@ -185,7 +185,7 @@ collections:
     defaults:
       layout: post
     output: true
-    permalink: /:collection/:title/
+    permalink: /events/:path/
   projects:
     output: true
     permalink: /:collection/:title/
