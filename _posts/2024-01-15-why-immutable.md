@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Immutability in Infrastructure and Why?
-date: 2024-01-15
+date: 2024-01-20
 description: 
 tags: infra tech
 giscus_comments: true
