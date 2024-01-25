@@ -43,7 +43,7 @@ According to [CNCF](https://glossary.cncf.io/immutable-infrastructure), immutabl
 
 Referring back to immutability in programming, immutability enables *referential transparency* (fxn `y` always returns `z` for input: `x`) as the value the variable `x` refers to never changes. This in turn enables pure functions (*and by extension, functional programming*). 
 
-In IaC, we see that immutable deployments ensure everything is constant for a deployment ***state***. We can refer to this ***state*** by it's release version (or `hash`). Knowing what immutability allows us to do, we can extend beyond just *immutability in infrastruture*. What if we tracked the inputs and outputs for each deployment process? We now enable [local reasoning](https://degoes.net/articles/fp-glossary), where inferring the correctness of the system is not dependent on *prior states* or *all inputs*. This translates to being able to pin down what file is exactly responsible for an issue in your deployment (solving by elimination is now feasible 😧). Tracking inputs in IaC becomes relatively easy when we use config files to store everything, and use tools like [pantsbuild](https://www.pantsbuild.org/) that leverage functional programming standards, transitive dependencees, and such.
+In IaC, we see that immutable deployments ensure everything is constant for a deployment ***state***. We can refer to this ***state*** by its release version (or `hash`). Knowing what immutability allows us to do, we can extend beyond just *immutability in infrastruture*. What if we tracked the inputs and outputs for each deployment process? We now enable [local reasoning](https://degoes.net/articles/fp-glossary), where inferring the correctness of the system is not dependent on *prior states* or *all inputs*. This translates to being able to pin down what file is exactly responsible for an issue in your deployment (solving by elimination is now feasible 😧). Tracking inputs in IaC becomes relatively easy when we use config files to store everything and use tools like [pantsbuild](https://www.pantsbuild.org/) that leverage functional programming standards, transitive dependencies, and such.
 
 ### Why?
 
@@ -72,17 +72,17 @@ flowchart TD
 
 By caching our output at `Proc A` for its inputs, `Config A` and `Config B`, we speed up our deployment builds.
 
-Furthermore we can avoid builds that do not change, for example, when only `Config A` is changed, we do not need to build `Image C`. This is a direct consequence of knowing our In's and Out's in the deployment process.
+Furthermore, we can avoid builds that do not change, for example, when only `Config A` is changed, we do not need to build `Image C`. This is a direct consequence of knowing our In's and Out's in the deployment process.
 
 ##### **Storage overhead**
 
-We know immutable objects make garbage collection easy in programming languages, due to the elimination of duplicate objects. Similarly here, the artifact created by `Proc A` is not dupliciated and hence lowers the storage overhead of the deployment build.
+We know immutable objects make garbage collection easy in programming languages, due to the elimination of duplicate objects. Similarly here, the artifact created by `Proc A` is not duplicated and hence lowers the storage overhead of the deployment build.
 
 On a large scale, when our images are tagged: ImageA.v0, ImageA.v1, ImageA.v2, ..., we only need to keep a single copy of each. Without immutable deployments, we can not tag images as they can mutate. As a consequence, we do not know what is where and why it is 😨.
 
 ##### **Support overhead**
 
-As one might guess, there are going to be a lot less support calls now that we can see what broke the build. Ideally most breaking changes are detected at the CI/CD level. If a new release goes bad, roll backs are a lot easier since everything is tagged in Git. If a user adds a fs mount that doesn't work, they can't (ideally). 
+As one might guess, there are going to be a lot fewer support calls now that we can see what broke the build. Ideally, most breaking changes are detected at the CI/CD level. If a new release goes bad, rollbacks are a lot easier since everything is tagged in Git. If a user adds a fs mount that doesn't work, they can't (ideally). 
 
 ##### **Engineering overhead**
 
