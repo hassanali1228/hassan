@@ -34,7 +34,7 @@ My thesis/diagram faces problems in the real world, however. It fails to recogni
 
 Responding to our central KQ: **“To what extent do the processes of observation and imagination operate independently in the pursuit of knowledge?”**, this post demonstrates that imagination and observation cooperate cyclically where they have independent relations to personal and shared knowledge. The two depend on each other through knowledge domains only. Individuals require empirical testing of theories to imagine with their personal knowledge. Meanwhile, the public's inquiry into natural laws is fuelled by other's imagination. In reference to the title, while ‘why not’ has a bigger span than ‘why’ as one imagines what is unobservable, and ‘why’ is more concrete than ‘why not’ where our observations are proven true unlike imagination, both are vital to make progress. This organization of how we derive new knowledge shows us the observational and imaginative pieces required for innovation.
 
-<span style="color:red">P.S.</span>:
+<span style="color:red">P.S.</span>
 
 this was a paper written a few years ago by a much younger me... in hindsight, I would explain how I derived the distinction in the quote.
 
