@@ -22,6 +22,7 @@ The motivation for this project has been the dreadful post-covid job market. Wit
 3. **Not distracting** -> minimal text only changes without worrying about design
 4. **Scaling changes** -> e.g. changing the format of one work experience should apply to all work experiences
 5. **Configurability** -> able to configure for different applications on the fly (e.g. education vs skills on top, order of experience bullets, etc...)
+6. **Version control** -> Easy to rollback resume and diff between resume versions produced over time to see what works and what doesn't (market feedback)
 
 Solution:
 
@@ -37,7 +38,7 @@ Let's implement it.
 
 Why TOML? It's neat and tidy. And we don't need much hierarchy, which is where the language falls short.
 
-I decided to keep the file structure intuitive to how a resume is laid out. You can see the entire structure in [resume.toml.example](https://github.com/hassanali1228/toml-resume/blob/main/resume.toml.example).
+I decided to keep the file structure intuitive to how a resume is laid out. You can see the entire structure in [resume.toml.example](https://github.com/hassanali1228/toml-resume/blob/main/resume.toml.example). Using a config file that just stores content with structure makes it easy to track changes over time (version control).
 
 ##### **Order matters**
 
@@ -153,13 +154,6 @@ def add_work_experience(
 ) -> None:
     ...
 
-    # code to add mission statement or not
-    line = f"{{\\color{{darkblue}} {experience['company']}"
-    line += f" - \\normalfont {experience['mission']}}}" if include_mission else "}"
-    writer.add_line(line)
-
-    ...
-
     # code to add experience bullets in specified order
     order_table = parse_role_table(experience["order"])
     for idx in order_table[role]:
@@ -187,7 +181,9 @@ def add_work_experiences(
 
 What's to be noted here is the same `add_work_experience` function is used for each experience in the `work_experiences` array. This allows us to prototype and apply formatting to all experiences altogether quickly, unlike in a LaTeX file. Modularity is key for quality-of-life features.
 
-### the latex.
+### extensions.
+
+##### **output**
 
 Now, we have our latex string as the output. The parser's job is done, so it is up to us what we do with the output.
 
@@ -195,7 +191,7 @@ Now, we have our latex string as the output. The parser's job is done, so it is 
 
 2. Output it to a `.tex` file
 
-### CLI
+##### **CLI**
 
 Add a CLI using a library such as: [`click`](https://click.palletsprojects.com/en/8.1.x/). Now you should have a CLI app that you can call anywhere:
 
@@ -205,4 +201,4 @@ which outputs a resume pdf within seconds for a job application (`pdflatex` can 
 
 <span style="color:red">P.S.</span>
 
-Trying a new thing here on the blog, where I share how I am tackling "real-life" problems with code. You are most welcome to code review in the comments :)
+Trying a new thing here on the blog, where I share how I code. You are most welcome to code review in the comments :)
