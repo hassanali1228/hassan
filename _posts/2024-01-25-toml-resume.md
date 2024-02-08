@@ -15,7 +15,7 @@ mermaid:
 
 The motivation for this project has been the dreadful post-covid job market. With a huge influx of applications, it becomes harder to stand out. At a startup I worked at previously with ~35 employees, they [received 20,000 job applications within one week](https://www.linkedin.com/feed/update/urn:li:activity:7156228649472434176/). Solution: shut down job postings within a few days after being posted. (My) Problem: My resume is not specialized for a particular job, so I will bookmark it and come back. I never come back... 
 
-... because it is a very mundane and mentally absorbing task. I need to make things easier for myself, so what do I require?
+... because it is a very mundane and mentally absorbing task to work on a resume. I need to make things easier for myself, so what do I require?
 
 1. **Runs offline**  -> I don't want to waste minutes logging onto and troubleshooting online platforms 
 2. **Is responsive** -> need quick feedback on my changes 
@@ -49,22 +49,23 @@ e.g. this:
 ```toml
 [[profile.links]]
 display = "hsnali.me"
-url = "https://hsnali.me"
-favicon = "Globe"
+...
 
 [[profile.links]]
 display = "911"
-favicon = "Phone"
+...
 ```
 
 will produce a different latex compared to:
 
 ```toml
 [[profile.links]]
-display = "911" ...
+display = "911" 
+...
 
 [[profile.links]]
-display = "hsnali.me" ...
+display = "hsnali.me" 
+...
 ```
 
 ##### **Intuitive**
