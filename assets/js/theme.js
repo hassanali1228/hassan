@@ -221,11 +221,11 @@ let determineComputedTheme = () => {
   let themeSetting = determineThemeSetting();
   if (themeSetting == "system") {
     const userPref = window.matchMedia;
-    if (userPref && userPref("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    } else {
-      return "light";
-    }
+    // if (userPref && userPref("(prefers-color-scheme: dark)").matches) {
+    //   return "dark";
+    // } else {
+    return "light";
+    // }
   } else {
     return themeSetting;
   }
@@ -246,7 +246,7 @@ let initTheme = () => {
   });
 
   // Add event listener to the system theme preference change.
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
-    applyTheme();
-  });
+  // window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+  //   applyTheme();
+  // });
 };
