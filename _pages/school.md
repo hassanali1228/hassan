@@ -6,7 +6,7 @@ description: reflecting on what I learn at school.
 nav: true
 nav_order: 3
 toc:
-    sidebar: left
+  sidebar: left
 ---
 
 Term-by-term course review of all technical ECE courses (in progress).
@@ -17,7 +17,7 @@ This term was the first term where you could choose your technical electives, an
 
 ### [ECE 351 (Compilers)](#ece351) {#ece351}
 
-This course combines the theory that you learn in [ECE 208](#ece208) with the practical implementation of compilers. You don't need to be an aspiring compiler engineer to like this course, a general passion for programming should be enough. This is because you learn how to design languages (grammars, LL(1), AST, etc...). This comes in pretty handy as a programmer, for example, when writing [idomatic code](https://en.wikipedia.org/wiki/Programming_idiom). You also learn how grammar design decides compiler implementation (e.g. [recursive descent parser possible only for LL(*k*) grammars](https://en.wikipedia.org/wiki/Recursive_descent_parser#:~:text=possible%20only,LL(k)%20grammars)).
+This course combines the theory that you learn in [ECE 208](#ece208) with the practical implementation of compilers. You don't need to be an aspiring compiler engineer to like this course, a general passion for programming should be enough. This is because you learn how to design languages (grammars, LL(1), AST, etc...). This comes in pretty handy as a programmer, for example, when writing [idomatic code](https://en.wikipedia.org/wiki/Programming_idiom). You also learn how grammar design decides compiler implementation (e.g. [recursive descent parser possible only for LL(_k_) grammars](<https://en.wikipedia.org/wiki/Recursive_descent_parser#:~:text=possible%20only,LL(k)%20grammars>)).
 
 > **Practical use**: design a [TOML document that stores resume information](/blog/2024/toml-resume/) and a program that compiles a resume pdf given the TOML document.
 
@@ -29,17 +29,17 @@ The labs really dialed in on teaching compilers as a design pattern, where you h
 
 For someone like me, who hasn't touched databases at all in co-op, this course is a Godsend. However, for the students who have taken databases, the formalization of database design and query formulation was an annoyance. The course teaches the following:
 
-1) **Logical Layer**
+1. **Logical Layer**
 
 {: .indent}
 You learn a) **DML** (Data Manipulation Language), where you first learn [Relational Algebra](https://en.wikipedia.org/wiki/Relational_algebra) (RA) and then how to derive SQL from the RA queries. b) **DDL** (Data Definition Language) which is your interface to create and modify the database structure. c) **TCL** (Transaction Control Language) which you don't formally learn in the course, but through the development of a project that leverages the MySQL API.
 
-2) **Database Design**
+2. **Database Design**
 
 {: .indent}
-You learn a) how to logically come up with an ERM (Entity Relationship Model), which accurately represents what the data is supposed to mean. You do this using ERM constructs like Entity Sets, Relationship Sets, Aggregation, etc... b) how to translate an ERM into an RM (Relational Model), so we can construct the database in SQL using the aforementioned RA constructs. c) Normalizing data using functional dependencies to avoid [unstructured duplications](https://en.wikipedia.org/wiki/Database_normalization#:~:text=reduce,integrity). 
+You learn a) how to logically come up with an ERM (Entity Relationship Model), which accurately represents what the data is supposed to mean. You do this using ERM constructs like Entity Sets, Relationship Sets, Aggregation, etc... b) how to translate an ERM into an RM (Relational Model), so we can construct the database in SQL using the aforementioned RA constructs. c) Normalizing data using functional dependencies to avoid [unstructured duplications](https://en.wikipedia.org/wiki/Database_normalization#:~:text=reduce,integrity).
 
-3) **Database Performance**
+3. **Database Performance**
 
 {: .indent}
 Was a bit of a rush to get through this content due to some disorganization in the course. We touched on interesting topics like how B+ trees are used for indexing where range-based lookups are done vs. hash maps for direct lookups. Most emphasis was placed on using these concepts to debug query performance and suggest improvements using `explain` and `explain analyze` in MySQL.
@@ -54,7 +54,7 @@ The exam was fair and it tested your understanding of course content well. Overa
 
 The goal of the course is to teach how a packet of data gets from one end to the other, and it does so by iterating through protocols in the [OSI model](https://en.wikipedia.org/wiki/OSI_model). Though the content at some points can be "dry", it can be enjoyable if you justify solutions by drawing intuition from predecessor courses. For example, you are challenged to use [ECE 307](#ece307) concepts to justify random MAC protocols: [CSMA/CD](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_detection). This course also sets up a good foundation for distributed computing, as you are challenged to keep things decentralized and decoupled to build good networks.
 
-The labwork was mainly building realistic simulations for network packet transmissions with statistical distributions, and rebuilding network layers. They weren't challenging if you are familiar with basic stats, binary math, and organizing your code. I found it more fun to structure my code for high reusability, compared to solving any network-related problems. The labs didn't challenge you to optimize, think creatively, etc..., *which I believe is a flaw in the course teaching*.
+The labwork was mainly building realistic simulations for network packet transmissions with statistical distributions, and rebuilding network layers. They weren't challenging if you are familiar with basic stats, binary math, and organizing your code. I found it more fun to structure my code for high reusability, compared to solving any network-related problems. The labs didn't challenge you to optimize, think creatively, etc..., _which I believe is a flaw in the course teaching_.
 
 ### [ECE 307 (Probability Theory and Statistics 2)](#ece307) {#ece307}
 
@@ -68,8 +68,8 @@ A mixed bag. You don't have any choices, but every course is pretty important to
 
 Before this course, students have a basic understanding of syscalls, trap requests, kernal/user space, multi-processing/threading, context switching, etc... from [ECE 252](#ece252). Now, all these topics are visited in detail, and you learn how the kernel implements security by isolating privelages in kernel mode, drawing inspiration from Unix.
 
-Since it is a _real-time_ OS course, there is a focus on task pre-emption/scheduling policies, priority inversion, lock contention, interrupt servicing, cache coherence, which all work together towards ensuring that the task runtime is **predictable**. It generally is the case that understanding how and when tasks operate within a system often leads to the creation of a more efficient system, where tasks aren't confined to specific runtimes. 
+Since it is a _real-time_ OS course, there is a focus on task pre-emption/scheduling policies, priority inversion, lock contention, interrupt servicing, cache coherence, which all work together towards ensuring that the task runtime is **predictable**. It generally is the case that understanding how and when tasks operate within a system often leads to the creation of a more efficient system, where tasks aren't confined to specific runtimes.
 
-The labs in this course are the most time-consuming task this term. I am bad at keeping track of time but there were a few all-nighters in the lab, spent debugging if it's the board or the OS that's wrong, and rewriting code that others got wrong. Often, you will find code jumping to unexpected locations which is initally confusing. You have to think like an OS to debug these labs, which makes them really good for understanding what an OS does. 
+The labs in this course are the most time-consuming task this term. I am bad at keeping track of time but there were a few all-nighters in the lab, spent debugging if it's the board or the OS that's wrong, and rewriting code that others got wrong. Often, you will find code jumping to unexpected locations which is initally confusing. You have to think like an OS to debug these labs, which makes them really good for understanding what an OS does.
 
 Grading of the lab is dependent on relative performance to the rest of class. The key to getting the extra marks, is not to use the over-engineered solutions, but to rather reason about where the CPU cycles are spent, and what needs to be in memory.

@@ -2,23 +2,22 @@
 layout: post
 title: Tackling the job market 1 TOML file at a time
 date: 2024-01-26
-description: 
+description:
 tags: tech coding project
 giscus_comments: true
 related_posts: false
 mermaid:
-    enabled: true
-
+  enabled: true
 ---
 
 [Github repo](https://github.com/hassanali1228/toml-resume)
 
-The motivation for this project has been the dreadful post-covid job market. With a huge influx of applications, it becomes harder to stand out. At a startup I worked at previously with ~35 employees, they [received 20,000 job applications within one week](https://www.linkedin.com/feed/update/urn:li:activity:7156228649472434176/). Solution: shut down job postings within a few days after being posted. (My) Problem: My resume is not specialized for a particular job, so I will bookmark it and come back. I never come back... 
+The motivation for this project has been the dreadful post-covid job market. With a huge influx of applications, it becomes harder to stand out. At a startup I worked at previously with ~35 employees, they [received 20,000 job applications within one week](https://www.linkedin.com/feed/update/urn:li:activity:7156228649472434176/). Solution: shut down job postings within a few days after being posted. (My) Problem: My resume is not specialized for a particular job, so I will bookmark it and come back. I never come back...
 
 ... because it is a very mundane and mentally absorbing task to work on a resume. I need to make things easier for myself, so what do I require?
 
-1. **Runs offline**  -> I don't want to waste minutes logging onto and troubleshooting online platforms 
-2. **Is responsive** -> need quick feedback on my changes 
+1. **Runs offline** -> I don't want to waste minutes logging onto and troubleshooting online platforms
+2. **Is responsive** -> need quick feedback on my changes
 3. **Not distracting** -> minimal text only changes without worrying about design
 4. **Scaling changes** -> e.g. changing the format of one work experience should apply to all work experiences
 5. **Configurability** -> able to configure for different applications on the fly (e.g. education vs skills on top, order of experience bullets, etc...)
@@ -28,7 +27,7 @@ Solution:
 
 ```mermaid
 flowchart LR
-    A[/TOML Config File/] --> P[[Resume TOML Parser]] 
+    A[/TOML Config File/] --> P[[Resume TOML Parser]]
     P --> B[/.tex file/]
 ```
 
@@ -60,17 +59,17 @@ will produce a different latex compared to:
 
 ```toml
 [[profile.links]]
-display = "911" 
+display = "911"
 ...
 
 [[profile.links]]
-display = "hsnali.me" 
+display = "hsnali.me"
 ...
 ```
 
 ##### **Intuitive**
 
-Referring to the previous example, we use an *array* to store all the links in the profile as **order matters**.
+Referring to the previous example, we use an _array_ to store all the links in the profile as **order matters**.
 
 We do a similar thing for work experiences (an `array of tables`). Now, if every experience is a `table` and contains just content, updating formatting for all experiences at once becomes easy.
 
@@ -92,9 +91,9 @@ Taking some inspiration from my compilers class, I built a stateful (👎) class
 
 {% highlight python linenos %}
 class ResumeWriter:
-    def __init__(self) -> None:
-        self.latex_str = ""
-        self.dent = 0
+def **init**(self) -> None:
+self.latex_str = ""
+self.dent = 0
 
     def add_line(self, line: str) -> None:
         self.latex_str += "  " * self.dent + line + "\n"
@@ -104,6 +103,7 @@ class ResumeWriter:
 
     def dedent(self, value: int = 1) -> None:
         self.dent -= value
+
 {% endhighlight %}
 
 Note: in this case, using a stateful class made sense for readability.
@@ -129,7 +129,7 @@ def parser(
 
     # add non-configurable LaTeX at start of file
     ...
-    
+
     for section, content in toml_dict.items():
         (method, *params) = section_parser_mapping[section] # assign input variables needed for each fxn
 
@@ -160,7 +160,7 @@ def add_work_experience(
     for idx in order_table[role]:
         try:
             writer.add_line(f"\\item {experience['content'][idx]}")
-        except IndexError: 
+        except IndexError:
             pass # allows for easy design re-iterations without breaking the code
 
     ...
@@ -196,7 +196,7 @@ Now, we have our latex string as the output. The parser's job is done, so it is 
 
 Add a CLI using a library such as: [`click`](https://click.palletsprojects.com/en/8.1.x/). Now you should have a CLI app that you can call anywhere:
 
-    `toml-resume --role=sre ./resume.toml`
+`toml-resume --role=sre ./resume.toml`
 
 which outputs a resume pdf within seconds for a job application (`pdflatex` can be slow).
 

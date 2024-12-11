@@ -11,10 +11,10 @@ profile:
   more_info: >
     <p>John Hancock Building, Chicago</p>
 
-news: true  # includes a list of news items
-latest_posts: true  # includes a list of the newest posts
+news: true # includes a list of news items
+latest_posts: true # includes a list of the newest posts
 selected_papers: false # includes a list of papers marked as "selected={true}"
-social: true  # includes social icons at the bottom of the page
+social: true # includes social icons at the bottom of the page
 ---
 
 Welcome! My name is Hassan. You can find here my experiences, musings, and whatever else I choose to share. I am a person who likes to explore and inquire. I do this as an engineer interested in computer systems, a part-time automobile enthusiast, and a human trying to understand [how we know what we know](https://en.wikipedia.org/wiki/Epistemology). Most content here will be regarding my engineering interests, so it's only fair for me to introduce how I got into it.
