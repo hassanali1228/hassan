@@ -9,6 +9,14 @@ toc:
   sidebar: left
 ---
 
+## [Arista Networks](https://arista.com/" "Company website") {#coop6}
+
+**Babe wake up, the link is down**
+
+I got to realize my coursework most at Arista. I was responsible for the [L1 (link) layer](https://en.wikipedia.org/wiki/Physical_layer) on network switches. It was nice to see applications of fourier transforms in signal processing and simple computer architecture concepts being put to good use.
+
+A network switch can have many configurations, and as a result, that many states to juggle. My job was to ensure we have a centralized diagnostic tool to aggregate and read from this distributed state system. Don't want to reveal too much detail here, but I want to share my learnings. I got to use design patterns here like the observer pattern to trigger state aggregations on changes. There is a huge emphasis on code quality as this is something Arista and its customers really value. [grugbrain.dev](https://grugbrain.dev). I now regret some of the code I wrote at [Stealth](#coop3) where I made it "easy" to dynamically extend features. This only worked if you follow a strict pre-determined design pattern and made it really inflexible to change the underlying functionality. I also learned how to write tests that document the code. Overall, I learned the most about being a **software** engineer here.
+
 ## [Databento](https://databento.com "Company website") {#coop4}
 
 **Are the servers running slow or is it just me...**
