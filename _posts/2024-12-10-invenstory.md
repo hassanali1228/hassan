@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Invenstory - decentralized inventory tracking
+title: Invenstory - decentralized inventory tracking with WiFi fingerprinting
 date: 2024-12-11
 description:
-tags: project infra
+tags: project
 giscus_comments: true
 related_posts: false
 mermaid:
   enabled: true
 ---
 
-Making a lean inventory tracking system that will improve with technology.
+Making a lean inventory tracking system that will monotonically imporve with time.
 
 A warehouse operates as a decentralized system with a shared state. Each asset moves inventory independently with a plan agreed upon between all assets. An _asset_ here can be a forklift, pallet jack, etc... There is a lot of active [research](https://uwaterloo.ca/analytics-optimization-lab/projects/adding-data-analytics-warehouse-logistics) going into how to optimize inventory management in these facilities. I will not bore you with collected data and research developments, but will present to you a fun solution to generate the data needed for these optimizations.
 
@@ -24,13 +24,13 @@ This is a geolocation problem. As inventory is commonly stored in indoor spaces,
 
 **System tracks each asset**
 
-This would be a centralized system tracking the location of each asset in the facility. Example: cameras strategically placed around the warehouse tracking the location of all assets using computer vision. This approach is cumbersome for many reasons including high overhead and vision obstruction, but conveys the notion of a centralized system clearly.
+This would be a centralized system tracking the location of each asset in the facility. Example: cameras strategically placed around the warehouse tracking the location of all assets using computer vision. This approach has high overhead and is prone to vision obstruction, but it demonstrates centralized tracking clearly.
 
 The benefit is that you have a fixed cost which won't scale with your number of assets. Only one "computer" is required to monitor all activities in the warehouse.
 
 **Asset reports to system**
 
-This means assets tracking their own location and reporting it to a centralized system. Example: cameras placed on each asset that decode location by reading barcodes placed around facility.
+This means assets tracking their own location and reporting it to an endpoint. Example: cameras placed on each asset that decode location by reading barcodes placed around facility.
 
 The benefit here is the reduced complexity as each agent finds their location independently, rather than a central system tracking all states simultaneously and having to differentiate between assets. You have all the other benefits that you get with a decentralized system like fault tolerance (central server goes down), scalability (no central compute contraint except for location ingestion pipeline), etc...
 
@@ -38,7 +38,9 @@ One thing that's not easy to see yet is that it opens up doors to an exciting ne
 
 ---
 
-**Asset reports to system** is chosen as the winner. The incurred overhead is worth it, because it enables a) a decentralized system, and b) location triangulation using signal strengths.
+**Chosen Approach: Asset reports to system**
+
+This method leverages each asset's ability to independently determine and report its location, facilitating a scalable and fault-tolerant solution.
 
 Let's take a step back here, and see what options we have to implement a decentralized tracking system?
 
@@ -105,12 +107,18 @@ def computeLocation(
     # return the weighted average of [ x, y ] as location of asset
 ```
 
-As previously discussed, WiFi fingerprinting will be less precise due to environmental factors. We can either use sensors to record these factors and input them into the RSS vectors for computing location. But a more static way of tackling this is to have less granular tracking using zoning in the warehouse. Exact dropoff and pickup points will already be stored in the inventory management software. With wider zones and recorded flow of traffic, we would have enough logging to apply meaningful optimizations to inventory management in the facility with little overhead
+As previously discussed, WiFi fingerprinting will be less precise due to environmental factors. We could add sensors to record humidity on assets and input this into the model for computing location. But a more static way of tackling this is to have less granular tracking using zoning in the warehouse. Exact dropoff and pickup points are already known. With wider zones and recorded flow of traffic, we would have enough log data to apply meaningful optimizations.
 
 ## How do you track inventory?
 
 Now that we know the location of the asset, how do we know what inventory is on the asset?
 
-For this, the most cost-effective solution is to use RFID tags on each item in the warehouse. The asset will have an RFID reader that will scan the items on it and report it to the centralized system. The system will then update the inventory database with the new location of the item.
+A lot of facilities already use RFID tech to store package information, detect misloads, etc... We can continue to use these by adding an RFID reader to each asset. The asset will periodically scan items on it and report these items to the centralized system.
 
-The tricky part here is to know when an item is removed or added to the asset. A weight sensor can be used to determine if an item is added or removed from the asset, in addition to what is scanned by the RFID reader. If the overhead is a concern, we can ensure that an asset is scanned for a certain time before we consider the scan as a removal or addition.
+The challenge here is to know when an item is removed from or added to the asset. This is an issue because the RFID antenna isn't guaranteed to scan all items on the asset in each scan. One way is to add a weight sensor to determine if an item is added or removed from the asset in addition to what is scanned by the RFID reader. To minimize overhead though, time can be used as a proxy for weight. By setting a threshold, we can guartee an item has been added or removed from the asset.
+
+## What's next?
+
+- Implement WiFi fingerprinting pipeline on a small scale
+- Designing a robust centralized system to handle inventory trackign and log management
+- Discuss optimizations enabled by log data
